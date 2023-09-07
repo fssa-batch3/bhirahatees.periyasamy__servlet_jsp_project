@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import com.fssa.pupdesk.model.Ticket;
 import com.fssa.pupdesk.services.TicketService;
 import com.fssa.pupdesk.services.exceptions.ServiceException;
-import com.mysql.cj.Session;
 
 /**
  * Servlet implementation class ListTicketServlet

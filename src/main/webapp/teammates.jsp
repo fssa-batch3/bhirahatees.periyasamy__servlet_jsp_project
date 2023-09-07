@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ 	 import="com.fssa.pupdesk.model.User,java.util.List"%>
+<%@ page import="com.fssa.pupdesk.model.User,java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>

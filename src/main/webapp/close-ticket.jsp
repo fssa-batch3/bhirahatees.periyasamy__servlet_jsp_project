@@ -92,7 +92,7 @@ button:hover {
 		<p>
 		<form action="<%="CloseTicketServlet?ticket="+ticket.getTicketId() %>" method="post">
 			<strong>Closing Description:</strong>
-			<textarea name="description" style="width: 100%; height: 100px;"></textarea>
+			<textarea name="description" style="width: 100%; height: 100px;" required></textarea>
 			<button>Submit</button>
 		</form>
 		</p>
