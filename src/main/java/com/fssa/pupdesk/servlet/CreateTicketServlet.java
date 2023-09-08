@@ -3,6 +3,7 @@ package com.fssa.pupdesk.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,9 +56,11 @@ public class CreateTicketServlet extends HttpServlet {
 			ticketService.createTicketService(new Ticket(fromEmail,
 					toEmail, summary, priority, "Open",
 					description));
-			out.println("Ticket Created !");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("ListTicketServlet?status=open");
+			dispatcher.forward(request, response);
 		} catch (ServiceException e) {
-			out.println("Failed To Create Ticket " + e.getMessage());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("create-ticket.jsp?errorMessage="+e.getMessage());
+			dispatcher.forward(request, response);
 		}
 	}
 

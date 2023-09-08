@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
-<%@ page import="com.fssa.pupdesk.model.User" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.fssa.pupdesk.model.User"%>
 
 <!DOCTYPE html>
 <html>
@@ -72,8 +73,18 @@ strong {
 	background-color: #0056b3;
 }
 </style>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
 </head>
 <body>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="home.jsp">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Profile</li>
+		</ol>
+	</nav>
 	<h1>User Profile</h1>
 
 	<%
@@ -99,9 +110,11 @@ strong {
 
 		<div class="action-buttons">
 			<button>
-				<a href="UpdateProfileServlet">Edit</a>
+				<a style="color:white;" href="UpdateProfileServlet">Edit</a>
 			</button>
-			<button><a href="delete-confirmation.jsp">Delete</a></button>
+			<button>
+				<a style="color:white;" href="delete-confirmation.jsp">Delete</a>
+			</button>
 		</div>
 	</div>
 	<%

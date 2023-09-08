@@ -44,11 +44,12 @@ public class ListTicketServlet extends HttpServlet {
 		System.out.println(loggedInEmail);
 		List<Ticket> tickets = null;
 		try {
-			tickets = new TicketService().getTicketbyService(loggedInEmail,redirection.toLowerCase());
+			tickets = new TicketService().getTicketbyService(loggedInEmail, redirection.toLowerCase());
 			System.out.print(redirection);
 			request.setAttribute("ticketList", tickets);
 			request.getRequestDispatcher(redirectionPage).forward(request, response);
 		} catch (ServiceException e) {
+			System.out.println(e.getMessage());
 			out.println("Failed to List Tickets " + e.getMessage());
 			request.setAttribute("ticketList", tickets);
 			request.getRequestDispatcher(redirectionPage).forward(request, response);

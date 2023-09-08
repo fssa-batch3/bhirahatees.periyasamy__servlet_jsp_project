@@ -49,8 +49,8 @@ public class RegistrationServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		if (!password.equals(conformPassword)) {
-			out.println("Password and confirm Password not match");
-//			response.sendRedirect("register.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp?errorMessage=Password not match with confirm Match.");
+			dispatcher.forward(request, response);
 		} else {
 			User user = null;
 			if (teamCode == null || teamCode.equals("")) {
@@ -65,7 +65,8 @@ public class RegistrationServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 				out.print("Registration Successfull");
 			} catch (ServiceException e) {
-				out.println("Failed to register");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp?errorMessage="+e.getMessage());
+				dispatcher.forward(request, response);
 			}
 		}
 	}

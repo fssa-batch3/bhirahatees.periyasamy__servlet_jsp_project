@@ -56,9 +56,21 @@ button:hover {
 	background-color: rgb(0, 0, 200);
 }
 </style>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
 </head>
 <body>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="home.jsp">Home</a></li>
+			<li class="breadcrumb-item"><a href="ListTicketServlet">List Ticket</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Close Ticket</li>
+		</ol>
+	</nav>
 	<h1>Ticket Preview</h1>
+
 	<div class="ticket-details">
 		<%
 		Ticket ticket = (Ticket) request.getAttribute("ticket");
@@ -90,9 +102,12 @@ button:hover {
 			<strong>Status:</strong>
 			<%=ticket.getStatus()%></p>
 		<p>
-		<form action="<%="CloseTicketServlet?ticket="+ticket.getTicketId() %>" method="post">
+		<form
+			action="<%="CloseTicketServlet?ticket=" + ticket.getTicketId()%>"
+			method="post">
 			<strong>Closing Description:</strong>
-			<textarea name="description" style="width: 100%; height: 100px;" required></textarea>
+			<textarea name="description" style="width: 100%; height: 100px;"
+				required></textarea>
 			<button>Submit</button>
 		</form>
 		</p>

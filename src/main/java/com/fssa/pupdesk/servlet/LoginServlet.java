@@ -3,6 +3,7 @@ package com.fssa.pupdesk.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,14 +42,13 @@ public class LoginServlet extends HttpServlet {
 			if (service.loginUser(email, password)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("loggedInEmail", email);
-				session.setAttribute("password", password);
 				out.println("Login Success");
 				response.sendRedirect("home.jsp");
 			}
 		} catch (ServiceException e) {
-			response.setStatus(302);
-			out.println("Login Failed");
-
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher("login.jsp?errorMessage="+e.getMessage());
+			dispatcher.forward(request, response);
 		}
 
 	}

@@ -57,8 +57,19 @@ h1 {
 	background-color: #0056b3;
 }
 </style>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
 </head>
 <body>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="home.jsp">Home</a></li>
+			<li class="breadcrumb-item"><a href="ProfileServlet">Profile</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Delete</li>
+		</ol>
+	</nav>
 	<h1>Delete Account Confirmation</h1>
 	<div class="confirmation-box">
 		<h2>Confirmation</h2>
