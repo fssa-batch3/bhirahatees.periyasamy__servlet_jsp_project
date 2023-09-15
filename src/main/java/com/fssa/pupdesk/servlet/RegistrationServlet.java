@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.fssa.pupdesk.model.User;
 import com.fssa.pupdesk.services.UserService;
 import com.fssa.pupdesk.services.exceptions.ServiceException;
@@ -22,51 +24,44 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public RegistrationServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String firstname = request.getParameter("firstname");
-		String lastname = request.getParameter("lastname");
-		String email = request.getParameter("email");
-		String teamCode = request.getParameter("teamcode");
-		String password = request.getParameter("password");
-		String conformPassword = request.getParameter("confirm-password");
-
+		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
-		if (!password.equals(conformPassword)) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp?errorMessage=Password not match with confirm Match.");
+
+		// Retrieve data from the request body
+		StringBuilder requestBody = new StringBuilder();
+		String line;
+		while ((line = request.getReader().readLine()) != null) {
+			requestBody.append(line);
+		}
+		JSONObject jsonData = new JSONObject(requestBody.toString());
+
+		String firstName = jsonData.getString("firstname");
+		String lastName = jsonData.getString("lastname");
+		String email = jsonData.getString("email");
+		String teamCode = jsonData.getString("classCode");
+		String password = jsonData.getString("password");
+		String confirmPassword = jsonData.getString("confirmPassword");
+		if (!password.equals(confirmPassword)) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher(
+					request.getContextPath() + "/register.jsp?errorMessage=Password not match with confirm Match.");
 			dispatcher.forward(request, response);
 		} else {
-			User user = null;
-			if (teamCode == null || teamCode.equals("")) {
-				user = new User(firstname, lastname, email, password);
-			} else {
-				user = new User(firstname, lastname, email, teamCode, password);
-			}
+			User user = new User(firstName, lastName, email, teamCode, password);
+			System.out.println(user.toString());
+
 			try {
 				UserService registerUser = new UserService();
-				registerUser.registerUser(user);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-				dispatcher.forward(request, response);
-				out.print("Registration Successfull");
+
+				if (registerUser.registerUser(user)) {
+					out.print("Success");
+				}
 			} catch (ServiceException e) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp?errorMessage="+e.getMessage());
-				dispatcher.forward(request, response);
+				System.out.println(e.getMessage());
 			}
 		}
 	}

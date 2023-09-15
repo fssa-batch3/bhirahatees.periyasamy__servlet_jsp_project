@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1e775ac4-1495-41d3-a055-af5c4f40e5f2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/CloseTicketServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/CloseTicketServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/ListTicketServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/ListTicketServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/LogoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/LogoutServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/RegistrationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fssa/pupdesk/servlet/RegistrationServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/close-ticket.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/create-ticket.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/delete-confirmation.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/edit-profile.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/header.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/home.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jstlDemo.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/profile.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/register.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/teammates.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/ticket-details.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/ticket-history.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/tickets.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/CloseTicketServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/CloseTicketServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/CreateTicketServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/CreateTicketServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/GetAllTickets.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/GetAllTickets.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/ListTicketServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/ListTicketServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/LoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/LoginServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/LogoutServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/LogoutServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/RegistrationServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/RegistrationServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/UpdateProfileServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fssa/pupdesk/servlet/UpdateProfileServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/com.fssa/pupdesk/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/com.fssa/pupdesk/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/pupdesk.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/Registration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/WEB-INF/classes/com/fssa/pupdesk/servlet/CreateeTicketServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/WEB-INF/classes/com/fssa/pupdesk/servlet/LoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pupdesk/WEB-INF/classes/com/fssa/pupdesk/servlet/LoginServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/WEB-INF/classes/com/fssa/pupdesk/servlet/RegistrationServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/pupdesk/WEB-INF/classes/com/fssa/pupdesk/servlet/RegistrationServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/WEB-INF/lib/json-20230618.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/WEB-INF/lib/jstl-1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/WEB-INF/lib/mysql-connector-j-8.0.33.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/WEB-INF/lib/protobuf-java-3.21.9.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/WEB-INF/lib/template-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/create-ticket.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/pupdesk/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/pupdesk/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pupdesk/login.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2VNODgUZ8V130OSeSyx3c1G4fTD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/BhirahateesVaranPeri/eclipse-workspace/pupdesk"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e775ac4-1495-41d3-a055-af5c4f40e5f2" name="Changes" comment="" />
+      <created>1694672956534</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1694672956534</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+
 import com.fssa.pupdesk.model.Ticket;
 import com.fssa.pupdesk.services.TicketService;
 import com.fssa.pupdesk.services.exceptions.ServiceException;
@@ -37,22 +39,22 @@ public class ListTicketServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String redirection = request.getParameter("status");
-		String redirectionPage = redirection.equals("closed") ? "ticket-history.jsp" : "tickets.jsp";
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
-		String loggedInEmail = (String) session.getAttribute("loggedInEmail");
-		System.out.println(loggedInEmail);
+		String loggedInEmail = (String) session.getAttribute("logginEmail");
 		List<Ticket> tickets = null;
+		System.out.println(loggedInEmail);
 		try {
 			tickets = new TicketService().getTicketbyService(loggedInEmail, redirection.toLowerCase());
-			System.out.print(redirection);
-			request.setAttribute("ticketList", tickets);
-			request.getRequestDispatcher(redirectionPage).forward(request, response);
+			JSONArray ticketJsonArray = new JSONArray(tickets);
+			System.out.println(tickets);
+			out.println(ticketJsonArray.toString());
+			out.flush();
+			out.close();
 		} catch (ServiceException e) {
 			System.out.println(e.getMessage());
-			out.println("Failed to List Tickets " + e.getMessage());
-			request.setAttribute("ticketList", tickets);
-			request.getRequestDispatcher(redirectionPage).forward(request, response);
+			out.println("null");
+
 		}
 	}
 

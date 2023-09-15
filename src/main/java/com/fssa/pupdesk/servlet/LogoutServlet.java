@@ -22,7 +22,6 @@ public class LogoutServlet extends HttpServlet {
 
 		if (session != null) {
 			session.removeAttribute("loggedInEmail");
-			session.removeAttribute("password");
 			System.out.println("Existing Session ID:" + session.getId());
 
 			// invalidate removes all the session attributes
@@ -34,7 +33,8 @@ public class LogoutServlet extends HttpServlet {
 		}
 		
 		// Redirecting to login page since we have logged out
-		response.sendRedirect("login.jsp");
+		System.out.print(request.getContextPath());
+		response.sendRedirect(request.getContextPath()+"/jsp/login.jsp");
 	}
 
 }

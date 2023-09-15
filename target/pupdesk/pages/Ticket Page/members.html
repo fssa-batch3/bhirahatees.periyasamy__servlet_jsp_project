@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Members</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../../assets/css/navbar-style.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="../../assets/css/sign-in.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <link rel="stylesheet" href="../../assets/css/new-ticket.css" />
+  </head>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+  <body>
+    <header>
+      <!-- using symantic tags -->
+      <nav class="navbar container-fluid sticky-top header">
+        <!-- navbar -->
+        <div class="container nav--bar nav-container">
+          <a class="navbar-brand nav-href nav-" href="./dashboard.html">
+            <!-- <img class="logo" src="#" alt="#" /> -->
+            Pupdesk
+          </a>
+        </div>
+        <ul class="nav-bar">
+          <li class="nav--items">
+            <a class="nav-link link" href="./dashboard.html">Dashboard</a>
+          </li>
+          <li class="nav--items">
+            <a
+              class="nav-link link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Tickets
+            </a>
+            <ul class="dropdown-menu drop">
+              <li>
+                <a class="dropdown-item" href="../Ticket Page/tickets.html"
+                  >Tickets List</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="../Ticket Page/raise_ticket.html"
+                  >Raise Ticket</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav--items">
+            <a class="nav-link link" href="../Ticket Page/history.html"
+              >History</a
+            >
+          </li>
+          <li class="nav--items">
+            <a class="nav-link link" href="../Ticket Page/members.html"
+              >Members</a
+            >
+          </li>
+        </ul>
+        <div class="dropdown profile-setting">
+          <a
+            class="btn dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img class="profile-logo" alt="profile" />
+          </a>
+
+          <ul class="dropdown-menu profile-drop">
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Edit Profile</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                onclick="clearData()"
+                href="../../index.html"
+                >Log out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <section class="tickets-row">
+      <div class="tickets-column" id="member-list">
+        <div class="form-group mb-4 search-box-container">
+          <input
+            id="exampleFormControlInput2x search-box"
+            type="email"
+            placeholder="What're you searching for?"
+            class="form-control form-control-underlined border-primary search-box"
+          />
+        </div>
+        <div class="table-heading member-heading">
+          <div class="name-heading">Name</div>
+          <div class="subject-heading">Designation</div>
+          <div class="status-heading">Email</div>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    function clearData() {
+      localStorage.removeItem("userEmail");
+    }
+
+    let userData = JSON.parse(window.localStorage.getItem("signinData"));
+    let user = window.localStorage.getItem("userEmail")
+    let profiles;
+    let team;
+    for (let i = 0; i < userData.length; i++) {
+      let valid = userData[i]["members"].find(
+        (validation) => user === validation["email"]
+      );
+      if (valid !== undefined) {
+        team = userData[i];
+        profiles = valid;
+      }
+    }
+
+    if (user === null) {
+      window.location.href = "../SignIn_login/login.html";
+    }
+
+    document
+      .querySelector(".profile-logo")
+      .setAttribute("src", profiles["profileLink"]);
+    function createCard(userName, userPosition, link, gmail) {
+      // container
+      let container = document.createElement("div");
+      container.classList.add("user-info");
+
+      // image containg div
+      let profile = document.createElement("div");
+      profile.classList.add("profile-name");
+      let imgDiv = document.createElement("div");
+      imgDiv.classList.add("profile-container");
+      let img = document.createElement("img");
+      img.classList.add("profile-logo", "profile");
+      img.setAttribute("src", link);
+      img.setAttribute("alt", "profile-pic");
+      imgDiv.append(img);
+      profile.append(imgDiv);
+      let name = document.createElement("div");
+      name.innerText = userName;
+      name.classList.add("ticket-name", "member-name");
+      profile.append(name);
+      container.append(profile);
+      let position = document.createElement("div");
+      position.classList.add("ticket-issue", "member-position");
+      position.innerText = userPosition;
+      container.append(position);
+      let mail = document.createElement("div");
+      mail.classList.add("ticket-priority", "member-email");
+      mail.innerText = gmail;
+      container.append(mail);
+      document.querySelector("#member-list").append(container);
+    }
+    for (let i = 0; i < team["members"].length; i++) {
+      // createCard(
+      //   profiles["name"],
+      //   profiles["position"],
+      //   profiles["profileLink"],
+      //   profiles["email"]
+      // );
+      createCard(
+        team["members"][i]["name"],
+        team["members"][i]["position"],
+        team["members"][i]["profileLink"],
+        team["members"][i]["email"]
+      );
+    }
+  </script>
+  <script>
+    function filterEmails(searchTerm) {
+      const memberCards = document.querySelectorAll(".user-info");
+
+      for (let i = 0; i < memberCards.length; i++) {
+        const email = memberCards[i]
+          .querySelector(".profile-name")
+          .querySelector(".member-name")
+          .innerText.toLowerCase();
+        if (email.includes(searchTerm)) {
+          memberCards[i].classList.remove("hidden");
+        } else {
+          memberCards[i].classList.add("hidden");
+        }
+      }
+    }
+    const searchInput = document.querySelector(".search-box");
+    searchInput.addEventListener("input", function () {
+      const searchTerm = searchInput.value.toLowerCase();
+      filterEmails(searchTerm);
+    });
+  </script>
+</html>

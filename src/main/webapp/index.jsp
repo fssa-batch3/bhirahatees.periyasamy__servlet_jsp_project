@@ -1,30 +1,95 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
-<head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-	crossorigin="anonymous"></script>
-<meta charset="ISO-8859-1">
-<title>BookWebApp</title>
-</head>
-<body>
-	<jsp:include page="header.jsp"></jsp:include>
-
-	<div class="p-5 mb-4 bg-body-tertiary rounded-3">
-		<div class="container-fluid py-5">
-			<h1 class="display-5 fw-bold">Pupdesk</h1>
-			<p class="col-md-8 fs-4">A sample project for demonstrating JSP and Servlets for passionate Java learners</p>
-			
-		</div>
-	</div>
-
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pupdesk</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <!-- using symantic tags -->
+      <nav class="navbar header">
+        <!-- navbar -->
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <!-- <img class="logo" src="#" alt="#" /> -->
+            Pupdesk
+          </a>
+          <div>
+          <a href="./jsp/register.jsp" class="login">Sign in</a>
+        <a href="./jsp/login.jsp" class="login">Log in</a>
+        </div>
+        </div>
+        <!-- nav items -->
+        
+      </nav>
+    </header>
+    <!-- using symantic tags -->
+    <section class="container-lg">
+      <div class="container-fluid">
+        <div class="container">
+          <img
+            class="gif-image img-fluid"
+            src="./assets/images/concept-of-seo-ranking.svg"
+            alt="concept-gif"
+          />
+        </div>
+        <div class=".container content">
+          <h3 class="slogan">Ticketing Made Easy: Power up Your Efficiency</h3>
+          <p class="sub-text">
+            Ticketing process becomes effortless and straightforward with the
+            tool. It suggests that the tool simplifies complex ticketing
+            workflows, making it user-friendly and accessible to all users.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="started-container">
+      <div class="sub-content">
+        <p class="sub-text sub-text-container">
+          Our Ticketing tool simplifies the process of managing tickets. It
+          suggests that the tool is designed to be user-friendly, intuitive, and
+          easy to navigate, eliminating complexities and reducing the learning
+          curve associated with ticketing systems.
+        </p>
+        <div class="get-started-container">
+          <a class="get-started" href="./jsp/register.jsp"
+            >Get Started</a
+          >
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="container-fluid footer-container">
+        <div class="terms">Terms Of service</div>
+        <div class="security">Security</div>
+        <div class="source-container">
+          <img
+            src="./assets/images/github.svg"
+            alt="github"
+            class="source-image"
+          />
+          <img
+            src="./assets/images/discord.svg"
+            alt="discord"
+            class="source-image"
+          />
+          <img
+            src="./assets/images/twitter.svg"
+            alt="twitter"
+            class="source-image"
+          />
+        </div>
+      </div>
+      <div class="footer-text">© Pupdesk. 2023 We love our users!</div>
+    </footer>
+  </body>
 </html>

@@ -3,12 +3,14 @@ package com.fssa.pupdesk.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 
 import com.fssa.pupdesk.model.Ticket;
 import com.fssa.pupdesk.services.TicketService;
@@ -35,8 +37,7 @@ public class CreateTicketServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
+
 	}
 
 	/**
@@ -45,22 +46,28 @@ public class CreateTicketServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String fromEmail = request.getParameter("from_email");
-		String toEmail = request.getParameter("to_email");
-		String summary = request.getParameter("summary");
-		String priority = request.getParameter("priority");
-		String description = request.getParameter("description");
+		
+		StringBuilder requestBody = new StringBuilder();
+		String line;
+		while ((line = request.getReader().readLine()) != null) {
+			requestBody.append(line);
+		}
+		JSONObject jsonData = new JSONObject(requestBody.toString());
+		HttpSession session = request.getSession();	
+		String fromEmail = (String)session.getAttribute("logginEmail");
+		String toEmail = jsonData.getString("to");
+		String summary = jsonData.getString("summary");
+		String priority = jsonData.getString("priority");
+		String description = jsonData.getString("description");
 		PrintWriter out = response.getWriter();
 		TicketService ticketService = new TicketService();
 		try {
-			ticketService.createTicketService(new Ticket(fromEmail,
-					toEmail, summary, priority, "Open",
-					description));
-			RequestDispatcher dispatcher = request.getRequestDispatcher("ListTicketServlet?status=open");
-			dispatcher.forward(request, response);
+			if (ticketService
+					.createTicketService(new Ticket(fromEmail, toEmail, summary, priority, "Open", description))) {
+				out.println("Success");
+			}
 		} catch (ServiceException e) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("create-ticket.jsp?errorMessage="+e.getMessage());
-			dispatcher.forward(request, response);
+			out.println("Failed to create Ticket");
 		}
 	}
 
