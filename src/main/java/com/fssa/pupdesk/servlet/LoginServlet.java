@@ -48,10 +48,11 @@ public class LoginServlet extends HttpServlet {
 		UserService service = new UserService();
 		try {
 			if (service.loginUser(email, password)) {
-				out.println("Login Success");
+				String message = "success".trim();
+				out.println(message);
 			}
 		} catch (ServiceException e) {
-			out.printf("Failed");
+			out.printf(e.getMessage());
 		}
 
 	}

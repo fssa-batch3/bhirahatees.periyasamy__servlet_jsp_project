@@ -11,7 +11,7 @@ function loginUser(user) {
 			"Content-Type": "application/json",
 		},
 	}).then((response) => {
-		if (response) {
+		if (response.data ==="success\r\n") {
 			window.location.href = "../Ticket Page/dashboard.html"
 		}
 	}).catch((err) => {

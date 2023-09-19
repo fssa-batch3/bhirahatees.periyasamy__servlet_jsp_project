@@ -31,7 +31,7 @@ const createTable = (ticketList) => {
 			// Create and append ticket ID cell with a link
 			let ticketIdCell = document.createElement("td");
 			let ticketIdLink = document.createElement("a");
-			ticketIdLink.href = "CloseTicketServlet?ticket=" + ticket.ticketId + "&status=";
+			ticketIdLink.href = "./reply-ticket.html?ticketid=" + ticket.ticketId;
 			ticketIdLink.appendChild(document.createTextNode(ticket.ticketId));
 			ticketIdCell.appendChild(ticketIdLink);
 
@@ -55,6 +55,7 @@ const createTable = (ticketList) => {
 		}
 	} else {
 		// Create a row with a "No tickets found" message
+		console.log(ticketList)
 		let noTicketsRow = document.createElement("tr");
 		let noTicketsCell = document.createElement("td");
 		noTicketsCell.colSpan = 8;
@@ -70,7 +71,7 @@ const createTable = (ticketList) => {
 const getTickets = () => {
 	const url = "/pupdesk/ListTicketServlet?status=open";
 	axios.get(url).then((response) => {
-		if (response.data !== "null") {
+		if (response.data === "null") {
 			console.log(response.data);
 			createTable(null);
 		} else {

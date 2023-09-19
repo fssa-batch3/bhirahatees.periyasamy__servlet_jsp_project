@@ -34,7 +34,7 @@ public class LogoutServlet extends HttpServlet {
 		
 		// Redirecting to login page since we have logged out
 		System.out.print(request.getContextPath());
-		response.sendRedirect(request.getContextPath()+"/jsp/login.jsp");
+		response.sendRedirect(request.getContextPath()+"/pages/SignIn_Login/login.html");
 	}
 
 }

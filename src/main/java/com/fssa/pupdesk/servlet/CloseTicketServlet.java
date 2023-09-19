@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+
 import com.fssa.pupdesk.model.Ticket;
 import com.fssa.pupdesk.services.TicketService;
 import com.fssa.pupdesk.services.exceptions.ServiceException;
@@ -35,16 +37,17 @@ public class CloseTicketServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String ticketId = request.getParameter("ticket");
+		String ticketId = request.getParameter("ticketid");
 		TicketService ticketService = new TicketService();
-
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		Ticket ticket = null;
 		try {
+
 			ticket = ticketService.getTicketByIdService(ticketId);
-			request.setAttribute("ticket", ticket);
-			request.getRequestDispatcher("close-ticket.jsp?ticket=" + ticketId).forward(request, response);
+			JSONObject ticketData = new JSONObject(ticket);
+			out.println(ticketData);
+			out.flush();
 		} catch (ServiceException e) {
 
 			out.println("Failed to get a Ticket");
@@ -57,14 +60,20 @@ public class CloseTicketServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String ticketId = request.getParameter("ticket");
-		String description = request.getParameter("description");
+		StringBuilder requestBody = new StringBuilder();
+		String line;
+		while ((line = request.getReader().readLine()) != null) {
+			requestBody.append(line);
+		}
+		JSONObject jsonData = new JSONObject(requestBody.toString());
+		String ticketId = jsonData.getString("ticketid");
+		String  description= jsonData.getString("description");
 		System.out.println(description + " " + ticketId);
 		TicketService ticketService = new TicketService();
 		PrintWriter out = response.getWriter();
 		try {
 			ticketService.updateTicketStatusService(ticketId, description);
-			response.sendRedirect("ListTicketServlet?status=closed");
+			out.println("Closed");
 		} catch (ServiceException e) {
 			out.println(e.getMessage());
 		}

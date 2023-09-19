@@ -7,7 +7,6 @@ function filterEmails(searchTerm) {
       .querySelector(".member-name")
       .querySelector(".member-email")
       .innerText.toLowerCase();
-    console.log(email, meme);
     if (email.includes(searchTerm)) {
       memberCards[i].classList.remove("hidden");
     } else {

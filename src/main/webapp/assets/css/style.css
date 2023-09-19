@@ -531,3 +531,8 @@ tr:nth-child(even) {
 	color: #777;
 }
 
+.data-contaier {
+	display:flex;
+
+}
+
