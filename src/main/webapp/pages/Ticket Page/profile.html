@@ -35,11 +35,9 @@
 					aria-expanded="false"> Tickets </a>
 					<ul class="dropdown-menu drop">
 						<li><a class="dropdown-item"
-							href="../Ticket Page/tickets.html">Tickets
-								List</a></li>
+							href="../Ticket Page/tickets.html">Tickets List</a></li>
 						<li><a class="dropdown-item"
-							href="../Ticket Page/raise_ticket.html">Raise
-								Ticket</a></li>
+							href="../Ticket Page/raise_ticket.html">Raise Ticket</a></li>
 					</ul></li>
 				<li class="nav--items"><a class="nav-link link"
 					href="../Ticket Page/history.html">History</a></li>
@@ -56,8 +54,7 @@
 					<li><a class="dropdown-item"
 						href="../Ticket Page/profile.html">Profile</a></li>
 					<li><a class="dropdown-item"
-						href="../Ticket Page/profile.html">Edit
-							Profile</a></li>
+						href="../Ticket Page/profile.html">Edit Profile</a></li>
 					<li><a class="dropdown-item log-out" onclick="clearData()"
 						href="/pupdesk/LogoutServlet">Log out</a></li>
 				</ul>
@@ -72,7 +69,7 @@
 			</div>
 			<div class="deatils-container">
 				<div class="container-fluid key-container">
-					<div class="keyholder">Channel :</div>
+					<div class="keyholder">Class :</div>
 					<div class="key"></div>
 				</div>
 				<div class="container-fluid contain-style">
@@ -89,78 +86,17 @@
 					<label class="keyholder">Email :</label> <input
 						class="email input-style" disabled />
 				</div>
-				<div class="container-fluid contain-style">
-					<div class="name-container">
-						<label class="firstName">Organization : </label> <input
-							class="org-input input-style" type="text" disabled />
-					</div>
-					<div class="name-container last-name-container">
-						<label class="lastName">Position : </label> <input
-							class="position-input input-style" type="text" disabled />
-					</div>
-				</div>
 				<div class="button-container">
-					<button class="change-button" id="change-btn">Edit</button>
+					<a href="./edit-profile.html"><button class="change-button" id="change-btn">Edit</button></a>
 					<button class="delete-button" id="del-btn">Delete</button>
 				</div>
 			</div>
 		</div>
 	</section>
 </body>
-<script>
-    function clearData() {
-      localStorage.removeItem("userEmail");
-    }
-    let sharingKey = crypto.randomUUID();
-    let userData = JSON.parse(window.localStorage.getItem("signinData"));
-    let user = window.localStorage.getItem("userEmail")
-    if (user === null) {
-      window.location.href = "../SignIn_login/login.html";
-    }
-    let profiles;
-    let team;
-    for (let i = 0; i < userData.length; i++) {
-      let valid = userData[i]["members"].find(
-        (validation) => user === validation["email"]
-      );
-      if (valid !== undefined) {
-        team = userData[i];
-        profiles = valid;
-      }
-    }
-    console.log(team);
-    document
-      .querySelector(".profile-logo")
-      .setAttribute("src", profiles["profileLink"]);
-    console.log(profiles, team);
-    let image = document
-      .querySelector(".profile-image")
-      .setAttribute("src", profiles.profileLink);
-    let userName = document.querySelector(".profile-name");
-    userName.innerText = profiles.name + " (You)";
-    let key = document.querySelector(".key");
-    key.innerText = team["channal"];
-    let names = profiles.name.split(" ");
-    document.querySelector(".name-input").value = names[0];
-    document.querySelector(".last-name-input").value = names[1];
-    document.querySelector(".email").value = profiles.email;
-    document.querySelector(".org-input").value = team.org;
-    document.querySelector(".position-input").value = profiles.position;
-    document.getElementById("change-btn").onclick = () => {
-      window.location.href = "./edit-profile.html";
-    };
-    document.getElementById("del-btn").onclick = () => {
-      let teamIndex = userData.indexOf(team);
-      let dataIndex = team["members"].indexOf(profiles);
-      console.log(team["members"][dataIndex], teamIndex, dataIndex);
-      team["members"].splice(dataIndex, 1);
-      userData[teamIndex] = team;
-      alert("success");
-      window.localStorage.setItem("signinData", JSON.stringify(userData));
-      window.location.href = "../../index.html";
-      clearData();
-    };
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../../assets/router/editProfile.js"></script>
+
 <script
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
 	integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

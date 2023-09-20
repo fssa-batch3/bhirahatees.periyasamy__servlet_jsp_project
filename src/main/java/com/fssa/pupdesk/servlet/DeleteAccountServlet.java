@@ -35,15 +35,14 @@ public class DeleteAccountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("loggedInEmail");
+		String email = (String) session.getAttribute("logginEmail");
+		System.out.println(email);
 		UserService deleteService = new UserService();
 		PrintWriter out = response.getWriter();
 		try {
 
 			deleteService.deleteUserService(email);
-			session.removeAttribute("loggedInEmail");
-			session.removeAttribute("password");
-			response.sendRedirect("register.jsp");
+			out.println("User Deleted");
 		} catch (ServiceException e) {
 			out.println(e.getMessage());
 		}

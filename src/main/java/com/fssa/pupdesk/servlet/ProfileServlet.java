@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+
 import com.fssa.pupdesk.model.User;
 import com.fssa.pupdesk.services.UserService;
 import com.fssa.pupdesk.services.exceptions.ServiceException;
@@ -33,15 +35,15 @@ public class ProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("loggedInEmail");
-		String password = (String) session.getAttribute("password");
+		String email = (String) session.getAttribute("logginEmail");
 		User user =  null;
 		PrintWriter out = response.getWriter();
 		try {
-			user = new UserService().getUser(email,password);
-			System.out.println(user.toString());
-			request.setAttribute("user", user);
-			request.getRequestDispatcher("profile.jsp").forward(request, response);
+			user = new UserService().getUser(email);
+			JSONObject userObject = new JSONObject(user);
+			out.println(userObject);
+			out.flush();
+			
 		} catch (ServiceException e) {	
 			out.println(e.getMessage());
 		}
