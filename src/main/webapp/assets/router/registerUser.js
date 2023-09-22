@@ -7,7 +7,8 @@ function signinUsingPost(userData) {
 			},
 		})
 		.then((response) => {
-			if (response) {
+			console.log(response);
+			if (response.data === "Success") {
 				console.log(response);
 				window.location.href = "./login.html";
 			}

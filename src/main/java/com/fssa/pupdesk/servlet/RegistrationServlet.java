@@ -61,7 +61,7 @@ public class RegistrationServlet extends HttpServlet {
 					out.print("Success");
 				}
 			} catch (ServiceException e) {
-				System.out.println(e.getMessage());
+				out.println(e.getMessage());
 			}
 		}
 	}

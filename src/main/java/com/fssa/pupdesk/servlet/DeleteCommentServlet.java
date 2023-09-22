@@ -8,25 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.fssa.pupdesk.model.Ticket;
-import com.fssa.pupdesk.services.TicketService;
+import com.fssa.pupdesk.services.CommentService;
 import com.fssa.pupdesk.services.exceptions.ServiceException;
 
 /**
- * Servlet implementation class CreateeTicketServlet
+ * Servlet implementation class DeleteCommentServlet
  */
-@WebServlet("/CreateTicketServlet")
-public class CreateTicketServlet extends HttpServlet {
+@WebServlet("/DeleteCommentServlet")
+public class DeleteCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CreateTicketServlet() {
+	public DeleteCommentServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,7 +35,8 @@ public class CreateTicketServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -46,29 +45,21 @@ public class CreateTicketServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		StringBuilder requestBody = new StringBuilder();
 		String line;
+		PrintWriter out = response.getWriter();
 		while ((line = request.getReader().readLine()) != null) {
 			requestBody.append(line);
 		}
 		JSONObject jsonData = new JSONObject(requestBody.toString());
-		HttpSession session = request.getSession();
-		String fromEmail = (String) session.getAttribute("logginEmail");
-		String toEmail = jsonData.getString("to");
-		String summary = jsonData.getString("summary");
-		String priority = jsonData.getString("priority");
-		String description = jsonData.getString("description");
-		PrintWriter out = response.getWriter();
-		TicketService ticketService = new TicketService();
+		int commendId = jsonData.getInt("commentId");
+		String ticketId = jsonData.getString("ticketId");
+		CommentService deleteComment = new CommentService();
 		try {
-			if (ticketService.isreceiverAndRaiserInSameTeam(fromEmail, toEmail)) {
-				if (ticketService
-						.createTicketService(new Ticket(fromEmail, toEmail, summary, priority, "Open", description))) {
-					out.println("Success");
-				}else {
-					throw new ServiceException("User Not Exists");
-				}
+			if (deleteComment.deleteCommentService(commendId, ticketId)) {
+				out.println("Success");
+			} else {
+				out.println("Failed");
 			}
 		} catch (ServiceException e) {
 			out.println(e.getMessage());

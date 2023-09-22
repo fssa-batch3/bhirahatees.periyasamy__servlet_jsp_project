@@ -1,4 +1,6 @@
-
+const userData = JSON.parse(sessionStorage.getItem("userData"));
+document.querySelector(".profile-logo").src = userData.profileImage;
+console.log(userData);
 const insertingDataInField = (userData) => {
 	const classCode = document.querySelector(".key");
 	classCode.innerText = userData.teamCode;

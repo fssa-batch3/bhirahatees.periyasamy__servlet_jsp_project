@@ -1,6 +1,10 @@
 const form = document.querySelector("#ticket-raise");
 const from = sessionStorage.getItem("logginEmail");
 
+const userData = JSON.parse(sessionStorage.getItem("userData"));
+document.querySelector(".profile-logo").src = userData.profileImage;
+console.log(userData);
+
 document.querySelector("#from_email").value = from;
 function createTicket(ticket) {
 	const url = "/pupdesk/CreateTicketServlet"
@@ -9,8 +13,9 @@ function createTicket(ticket) {
 			"Content-Type": "application/json"
 		}
 	}).then((response) => {
-		if (response) {
-			window.location.href = "/pupdesk/pages/Ticket Page/tickets.html"
+
+		if (response.data === "Success\r\n") {
+			window.location.href = "/pupdesk/pages/Ticket Page/tickets.html";
 		}
 	}).catch(error => console.error(error.message))
 }
@@ -28,5 +33,4 @@ form.addEventListener("submit", (e) => {
 	}catch(err){
 		console.log(err.message)
 	}
-
 })

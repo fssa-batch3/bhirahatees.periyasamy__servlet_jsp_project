@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="../../assets/css/style.css" />
 <link rel="stylesheet" href="../../assets/css/dashboard.css" />
 <link rel="stylesheet" href="../../assets/css/sign-in.css" />
+<link rel="stylesheet"
+	href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 </head>
 <style>
 h1 {
@@ -55,6 +57,37 @@ button {
 
 button:hover {
 	background-color: rgb(0, 0, 200);
+}
+
+.comment {
+	width: 25rem;
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: #f1f1f1;
+}
+
+.comment-data {
+	border: 2px solid #f1f1f1;
+	color: rgb(0, 0, 0);
+}
+
+.edited-comment {
+	font-style: italic;
+	color: gray;
+}
+
+.time {
+	padding-left: 2rem;
+}
+
+.save-button, .button-style {
+margin-left:0.5rem;
+	padding: 0.2rem;
+	width: 30%;
+}
+
+.save-button {
+	display: none;
 }
 </style>
 <body>
@@ -105,42 +138,50 @@ button:hover {
 		<div class="ticket-details">
 			<h2>Ticket Details</h2>
 			<p class="data-container">
-				<strong>Ticket ID:</strong><p class="ticketid-data"></p>
+				<strong>Ticket ID:</strong>
+			<p class="ticketid-data"></p>
 			</p>
 
 
 			<p class="data-contaier">
-				<strong>Created Time:</strong><p class="ticket__created-time"></p>
+				<strong>Created Time:</strong>
+			<p class="ticket__created-time"></p>
 
 			</p>
 
 			<p class="data-contaier">
-				<strong>From:</strong><p class="ticket__from"></p>
+				<strong>From:</strong>
+			<p class="ticket__from"></p>
 
 			</p>
 
 			<p class="data-contaier">
-				<strong>To:</strong><p class="ticket__raiser"></p>
+				<strong>To:</strong>
+			<p class="ticket__raiser"></p>
 
 			</p>
 
 			<p class="data-contaier">
-				<strong>Summary:</strong><p class="ticket__summary"></p>
+				<strong>Summary:</strong>
+			<p class="ticket__summary"></p>
 
 			</p>
 
 			<p class="data-contaier">
-				<strong>Description:</strong><p class="ticket__description"></p>
+				<strong>Description:</strong>
+			<p class="ticket__description"></p>
 
 			</p>
 
 			<p class="data-contaier">
-				<strong>Priority:</strong><p class="ticket__priority"></p>
+				<strong>Priority:</strong>
+			<p class="ticket__priority"></p>
 
 			</p>
 
 			<p class="data-contaier">
-				<strong>Status:</strong><p class="ticket__status"></p>
+				<strong>Status:</strong>
+			<p class="ticket__status"></p>
 
 			</p>
 
@@ -152,13 +193,26 @@ button:hover {
 				<button>Submit</button>
 			</form>
 			</p>
+		</div>
+		<div class="comments-section">
+			<h3 style="padding: 1rem">
+				Comments
+				</h1>
 
-
+				<form class="comments-form">
+					<textarea class="comment-input" name="comment"
+						style="width: 30%; height: 100px;" required></textarea>
+					<div style="padding: 1rem">
+						<button style="width: 10%">Submit</button>
+					</div>
+				</form>
+				<div class="comments-container"></div>
 		</div>
 	</section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../../assets/router/closeTicket.js"></script>
+<script src="../../assets/router/comments.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
 	integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

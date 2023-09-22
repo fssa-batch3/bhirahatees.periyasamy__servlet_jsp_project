@@ -1,6 +1,9 @@
 const table = document.querySelector(".tickets-table");
 const path = window.location.pathname.split("/");
 
+const userData = JSON.parse(sessionStorage.getItem("userData"));
+document.querySelector(".profile-logo").src = userData.profileImage;
+console.log(userData);
 
 const createTable = (ticketList) => {
 	// Create the table header row
@@ -8,7 +11,7 @@ const createTable = (ticketList) => {
 
 	let headerRow = document.createElement("tr");
 	// Create and append table header cells
-	let headers = ["Ticket ID", "Created Time", "From", "To", "Summary", "Description", "Priority", "Status"];
+	let headers = ["Serial No", "Ticket ID", "Created Time", "From", "To", "Summary", "Description", "Priority", "Status"];
 	for (let i = 0; i < headers.length; i++) {
 		let th = document.createElement("th");
 		th.appendChild(document.createTextNode(headers[i]));
@@ -16,6 +19,11 @@ const createTable = (ticketList) => {
 	}
 
 	thead.appendChild(headerRow);
+
+	// Access the table element
+	let table = document.createElement("table");
+
+	// Append the table header to the table
 	table.appendChild(thead);
 
 	// Access ticketList from the JSON data
@@ -28,25 +36,28 @@ const createTable = (ticketList) => {
 			// Create a table row
 			let row = document.createElement("tr");
 
+			// Create and append serial number cell
+			let serialNoCell = document.createElement("td");
+			serialNoCell.appendChild(document.createTextNode(i + 1));
+			row.appendChild(serialNoCell);
+
 			// Create and append ticket ID cell with a link
 			let ticketIdCell = document.createElement("td");
 			let ticketIdLink = document.createElement("a");
 			ticketIdLink.href = "./reply-ticket.html?ticketid=" + ticket.ticketId;
 			ticketIdLink.appendChild(document.createTextNode(ticket.ticketId));
 			ticketIdCell.appendChild(ticketIdLink);
+			row.appendChild(ticketIdCell);
 
 			// Create and append other cells
-			let cells = [ticketIdCell, document.createElement("td"), document.createElement("td"), document.createElement("td"),
+			let cells = [document.createElement("td"), document.createElement("td"), document.createElement("td"), document.createElement("td"),
 				document.createElement("td"), document.createElement("td"), document.createElement("td"), document.createElement("td")];
 
 			let cellData = [ticket.createdTime, ticket.from, ticket.to, ticket.summary, ticket.description, ticket.priority, ticket.status];
 
-			for (let j = 1; j < cells.length; j++) {
-				cells[j].appendChild(document.createTextNode(cellData[j - 1]));
-			}
-
-			// Append all cells to the row
-			for (let j = 0; j < cells.length; j++) {
+			for (let j = 0; j < (cells.length - 1); j++) {
+				cells[j].appendChild(document.createTextNode(cellData[j]));
+				console.log(cells[j] , cellData[j] , j);
 				row.appendChild(cells[j]);
 			}
 
@@ -55,16 +66,17 @@ const createTable = (ticketList) => {
 		}
 	} else {
 		// Create a row with a "No tickets found" message
-		console.log(ticketList)
 		let noTicketsRow = document.createElement("tr");
 		let noTicketsCell = document.createElement("td");
-		noTicketsCell.colSpan = 8;
+		noTicketsCell.colSpan = 9;
 		noTicketsCell.className = "no-tickets";
 		noTicketsCell.appendChild(document.createTextNode("No tickets found."));
 		noTicketsRow.appendChild(noTicketsCell);
 		table.appendChild(noTicketsRow);
 	}
 
+	// Append the table to the document or an existing container
+	document.body.appendChild(table);
 }
 
 

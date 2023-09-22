@@ -11,6 +11,10 @@ const insertingDataInField = (userData) => {
 	profileImage.src = userData.profileImageUrl;
 }
 
+const userData = JSON.parse(sessionStorage.getItem("userData"));
+document.querySelector(".profile-logo").src = userData.profileImage;
+console.log(userData);
+
 const deleteUserAccount = () => {
 	axios.get("/pupdesk/DeleteAccountServlet").then((response) => {
 		if (response.data === "User Deleted\r\n") window.location.href = "/pupdesk/index.html";
@@ -32,6 +36,30 @@ deleteButton.addEventListener("click", (e) => {
 	}
 
 })
+
+const source = document.querySelector("#profile");
+document.querySelector(".add-pic").onclick = () => {
+	const fileInput = document.getElementById("file-input");
+	fileInput.addEventListener("change", () => {
+		const file = fileInput.files[0];
+		const formData = new FormData();
+		formData.append("file", file);
+		formData.append("upload_preset", "ml_default"); // Replace with your upload preset name
+		fetch("https://api.cloudinary.com/v1_1/defftwb18/auto/upload", {
+			method: "POST",
+			body: formData,
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				source.src = data.url;
+				console.log(source);
+			})
+			.catch((error) => console.error(error));
+	});
+
+
+}
+
 
 
 

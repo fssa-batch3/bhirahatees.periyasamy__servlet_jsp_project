@@ -43,7 +43,7 @@ public class UpdateProfileServlet extends HttpServlet {
 		User user = null;
 		PrintWriter out = response.getWriter();
 		try {
-			user = new UserService().getUser(email, password);
+			user = new UserService().getUser(email);
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("edit-profile.jsp").forward(request, response);
 		} catch (ServiceException e) {

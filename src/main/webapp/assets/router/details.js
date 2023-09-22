@@ -2,6 +2,10 @@ const ticketId = {
   ticketid: new URLSearchParams(window.location.search).get("ticketid"),
 };
 
+const userData = JSON.parse(sessionStorage.getItem("userData"));
+document.querySelector(".profile-logo").src = userData.profileImage;
+console.log(userData);
+
 const insertingData = (ticketData) => {
   const ticketIdContainer = document.querySelector(".ticketid-data");
   ticketIdContainer.innerText = ticketData.ticketId;
@@ -20,8 +24,10 @@ const insertingData = (ticketData) => {
   const ticketStatus = document.querySelector(".ticket__status");
   ticketStatus.innerText = ticketData.status;
   const ticketClosingDescr = document.querySelector(".ticket__closing-descripton");
-  ticketClosingDescr.innerHTML = ticketData.closingDescription;
+  ticketClosingDescr.innerText= ticketData.closingDescription;
 };
+
+
 
 axios
   .get("/pupdesk/CloseTicketServlet", {
