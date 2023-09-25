@@ -590,3 +590,18 @@ tr:nth-child(even) {
 .data-contaier {
 	display: flex;
 }
+
+.error-container{
+   display:flex;
+   justify-content:center;
+   margin-top:1rem;	
+}
+.error-message{
+	font-size:1.1rem;
+	padding:1rem;
+}
+
+.button___container{
+	display:flex;
+	justify-content:space-between;
+}

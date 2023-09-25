@@ -7,15 +7,29 @@ function signinUsingPost(userData) {
 			},
 		})
 		.then((response) => {
-			console.log(response);
+			
 			if (response.data === "Success") {
 				console.log(response);
 				window.location.href = "./login.html";
+			}else{
+				console.log(response);
+				errMessage(response.data);
 			}
 		})
 		.catch((error) => {
 			console.log(error.message);
 		});
+}
+
+const errMessage = (error)=>{
+	const container = document.createElement("div");
+	container.classList.add("error-message", "alert", "alert-danger");
+	container.innerText = error;
+	const errorContainer = document.querySelector(".error-container");
+	errorContainer.appendChild(container);
+	setTimeout(()=>{
+		container.remove()
+	},5000)
 }
 
 document.querySelector(".teamCode").onclick = () => {
@@ -37,10 +51,6 @@ form.addEventListener("submit", (e) => {
 	let classCode = document.querySelector(".key").value;
 	const password = document.querySelector(".password").value;
 	const confirmPassword = document.querySelector(".confo-password").value;
-
-
-	console.log(email);
-
 	if (classCode.trim() === "" || classCode === null) {
 		let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		for (let i = 0; i < 6; i++) {

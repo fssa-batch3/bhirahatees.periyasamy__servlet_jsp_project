@@ -25,3 +25,12 @@ const getUserData = () => {
 
 getUserData()
 
+const path = window.location.pathname.split("/");
+
+if (path[path.length - 1] === "edit-profile.html") {
+	const form = document.querySelector("#form");
+	form.addEventListener("submit", (e) => {
+		e.preventDefault();
+		console.log(e);
+	})
+}

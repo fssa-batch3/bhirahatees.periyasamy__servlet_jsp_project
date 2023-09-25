@@ -13,11 +13,25 @@ function loginUser(user) {
 	}).then((response) => {
 		if (response.data === "success\r\n") {
 			window.location.href = "../Ticket Page/dashboard.html"
+		}else{
+			errMessage(response.data);
 		}
 	}).catch((err) => {
 		console.error(err);
 	})
 }
+
+const errMessage = (error)=>{
+	const container = document.createElement("div");
+	container.classList.add("error-message", "alert", "alert-danger");
+	container.innerText = error;
+	const errorContainer = document.querySelector(".error-container");
+	errorContainer.appendChild(container);
+	setTimeout(()=>{
+		container.remove()
+	},5000)
+}
+
 
 form.addEventListener("submit", (e) => {
 	e.preventDefault();

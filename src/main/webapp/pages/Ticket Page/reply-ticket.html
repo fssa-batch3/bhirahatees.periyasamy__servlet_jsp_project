@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="../../assets/css/style.css" />
 <link rel="stylesheet" href="../../assets/css/dashboard.css" />
 <link rel="stylesheet" href="../../assets/css/sign-in.css" />
+<link rel="stylesheet" href="../../assets/css/new-ticket.css" />
+
 <link rel="stylesheet"
 	href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 </head>
@@ -81,7 +83,7 @@ button:hover {
 }
 
 .save-button, .button-style {
-margin-left:0.5rem;
+	margin-left: 0.5rem;
 	padding: 0.2rem;
 	width: 30%;
 }
@@ -157,25 +159,27 @@ margin-left:0.5rem;
 
 			<p class="data-contaier">
 				<strong>To:</strong>
-			<p class="ticket__raiser"></p>
-
+			<p class="ticket__raiser ticket__details"></p>
+			<input type="email" id="to_email" class="edit-inputs" name="to_email" required />
 			</p>
 
 			<p class="data-contaier">
 				<strong>Summary:</strong>
-			<p class="ticket__summary"></p>
+			<p class="ticket__summary ticket__details"></p>
+			<input type="text" id="summary" class="edit-inputs" name="summary" required />
 
 			</p>
 
-			<p class="data-contaier">
-				<strong>Description:</strong>
-			<p class="ticket__description"></p>
 
-			</p>
 
 			<p class="data-contaier">
 				<strong>Priority:</strong>
-			<p class="ticket__priority"></p>
+			<p class="ticket__priority ticket__details"></p>
+			<select id="priority" class="edit-inputs" name="priority" required>
+				<option value="Low">Low</option>
+				<option value="Medium">Medium</option>
+				<option value="High">High</option>
+			</select>
 
 			</p>
 
@@ -185,6 +189,13 @@ margin-left:0.5rem;
 
 			</p>
 
+			<p class="data-contaier">
+				<strong>Description:</strong>
+			<p class="ticket__description ticket__details"></p>
+			<textarea id="description" class="edit-inputs" name="description" rows="4" cols="50"
+				required></textarea>
+
+			</p>
 			<p>
 			<form class="closing-form">
 				<strong>Closing Description:</strong>

@@ -99,7 +99,7 @@ const createComments = (commentJson) => {
 		time.classList.add("time");
 		commentDiv.appendChild(span);
 		const commentDataDiv = document.createElement("span");
-		const commentDesc = document.createElement("input");
+		const commentDesc = document.createElement("textarea");
 		commentDesc.value = comment.comment;
 		commentDesc.classList.add("comment-data");
 		commentDesc.disabled = true;

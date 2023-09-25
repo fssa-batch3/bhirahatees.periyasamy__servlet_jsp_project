@@ -59,20 +59,7 @@ public class UpdateProfileServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		String password = request.getParameter("password");
-		String email = (String) session.getAttribute("loggedInEmail");
-		if (password.isEmpty() || password.equals("") || password == null) {
-			try {
-				password = new UserDAO().login(email).getPassword();
-			} catch (DAOException e) {
-				request.getRequestDispatcher("UpdateProfileServlet?errorMessage=" + e.getMessage()).forward(request,
-						response);
-			}
-		}
-
-		User updatedUser = new User(request.getParameter("firstname"), request.getParameter("lastname"), email,
-				request.getParameter("teamcode"), password);
-		updatedUser.setProfileImageUrl(request.getParameter("profileUrl"));
+		User updatedUser = new User();
 		System.out.println(updatedUser.toString());
 		try {
 			User updateService = new UserService().updateUserService(updatedUser);

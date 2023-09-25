@@ -3,7 +3,6 @@ package com.fssa.pupdesk.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,24 +45,21 @@ public class RegistrationServlet extends HttpServlet {
 		String teamCode = jsonData.getString("classCode");
 		String password = jsonData.getString("password");
 		String confirmPassword = jsonData.getString("confirmPassword");
-		if (!password.equals(confirmPassword)) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher(
-					request.getContextPath() + "/register.jsp?errorMessage=Password not match with confirm Match.");
-			dispatcher.forward(request, response);
-		} else {
+
+		try {
+			if (!password.equals(confirmPassword)) {
+				throw new ServiceException("Password Not Match");
+			}
 			User user = new User(firstName, lastName, email, teamCode, password);
 			System.out.println(user.toString());
-
-			try {
-				UserService registerUser = new UserService();
-
-				if (registerUser.registerUser(user)) {
-					out.print("Success");
-				}
-			} catch (ServiceException e) {
-				out.println(e.getMessage());
+			UserService registerUser = new UserService();
+			if (registerUser.registerUser(user)) {
+				out.print("Success");
 			}
+		} catch (ServiceException e) {
+			out.println(e.getMessage());
 		}
+
 	}
 
 }
