@@ -44,7 +44,7 @@ public class TicketDetailServlet extends HttpServlet {
 			request.setAttribute("ticket", ticket);
 			request.getRequestDispatcher("ticket-details.jsp").forward(request, response);
 		}catch(ServiceException e) {
-			
+
 			out.println("Failed to get a Ticket");
 		}
 		

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+
 import com.fssa.pupdesk.model.User;
 import com.fssa.pupdesk.services.UserService;
 import com.fssa.pupdesk.services.exceptions.ServiceException;
@@ -38,12 +40,14 @@ public class ListTeamMatesServlet extends HttpServlet {
 			throws ServletException, IOException {
 		UserService getUsers = new UserService();
 		HttpSession session = request.getSession();
-		String loggedInEmail = (String) session.getAttribute("loggedInEmail");
+		String loggedInEmail = (String) session.getAttribute("logginEmail");
 		PrintWriter out = response.getWriter();
 		try {
 			List<User> teamMates = getUsers.getSameTeamUsersService(loggedInEmail);
-			request.setAttribute("teamMates", teamMates);
-			request.getRequestDispatcher("teammates.jsp").forward(request, response);
+			JSONArray accountsJSonArray = new JSONArray(teamMates);
+			System.out.println(loggedInEmail);
+			out.println(accountsJSonArray);
+			out.flush();
 		} catch (ServiceException e) {
 			out.println(e.getMessage());
 		}

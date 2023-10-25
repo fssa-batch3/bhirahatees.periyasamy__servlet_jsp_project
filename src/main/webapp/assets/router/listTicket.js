@@ -3,7 +3,7 @@ const path = window.location.pathname.split("/");
 
 const userData = JSON.parse(sessionStorage.getItem("userData"));
 document.querySelector(".profile-logo").src = userData.profileImage;
-console.log(userData);
+const yourTickets = document.querySelector(".your-tickets");
 
 const createTable = (ticketList) => {
 	// Create the table header row
@@ -29,6 +29,7 @@ const createTable = (ticketList) => {
 	// Access ticketList from the JSON data
 
 	if (ticketList != null) {
+		console.log(ticketList);
 		// Loop through the ticketList
 		for (var i = 0; i < ticketList.length; i++) {
 			let ticket = ticketList[i];
@@ -84,10 +85,8 @@ const getTickets = () => {
 	const url = "/pupdesk/ListTicketServlet?status=open";
 	axios.get(url).then((response) => {
 		if (response.data === "null") {
-			console.log(response.data);
 			createTable(null);
 		} else {
-			console.log(response.data);
 			createTable(response.data);
 		}
 

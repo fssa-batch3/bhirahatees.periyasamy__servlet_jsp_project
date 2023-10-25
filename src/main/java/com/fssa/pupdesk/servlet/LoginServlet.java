@@ -43,8 +43,7 @@ public class LoginServlet extends HttpServlet {
 		String password = jsonData.getString("password");
 		HttpSession session = request.getSession();
 		session.setAttribute("logginEmail",email);
-
-
+        System.out.println(session.getAttribute("logginEmail")); 
 		UserService service = new UserService();
 		try {
 			if (service.loginUser(email, password)) {

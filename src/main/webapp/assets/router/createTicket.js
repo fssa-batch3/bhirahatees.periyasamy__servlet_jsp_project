@@ -1,29 +1,22 @@
 const form = document.querySelector("#ticket-raise");
 const from = sessionStorage.getItem("logginEmail");
 
-const sendEmail = async (data) => {
-	try {
-		const transporter = nodemailer.createTransport({
-			host: "smtp.office365.com",
-			port: 587,
-			secure: false, // Set to true if you're using a secure connection (TLS/SSL)
-			auth: {
-				user: "bhirahatees.periyasamy@outlook.com",
-				pass: "KQdpyG5Am5H7BBD",
-			},
-		});
-		const info = await transporter.sendMail(data);
-		console.log(info);
-		transporter.close();
-	} catch (err) {
-		console.error(err);
-	}
-
-}
-
 const userData = JSON.parse(sessionStorage.getItem("userData"));
 document.querySelector(".profile-logo").src = userData.profileImage;
 console.log(userData);
+
+
+const errMessage = (error)=>{
+	const container = document.createElement("div");
+	container.classList.add("error-message", "alert", "alert-danger");
+	container.innerText = error;
+	const errorContainer = document.querySelector(".error-container");
+	errorContainer.appendChild(container);
+	setTimeout(()=>{
+		container.remove()
+	},5000)
+}
+
 
 document.querySelector("#from_email").value = from;
 function createTicket(ticket) {
@@ -36,6 +29,8 @@ function createTicket(ticket) {
 
 		if (response.data === "Success\r\n") {
 			window.location.href = "/pupdesk/pages/Ticket Page/tickets.html";
+		}else{
+			errMessage(response.data)
 		}
 	}).catch(error => console.error(error.message))
 }
@@ -65,6 +60,8 @@ Thank you for your patience.\n
 \n
 Best regards,\n
 Pupdesk`;
+
+
 
 	try {
 		createTicket(ticketData)

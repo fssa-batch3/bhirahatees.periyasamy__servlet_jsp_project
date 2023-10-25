@@ -49,8 +49,7 @@ public class CloseTicketServlet extends HttpServlet {
 			out.println(ticketData);
 			out.flush();
 		} catch (ServiceException e) {
-
-			out.println("Failed to get a Ticket");
+		  	out.println("Failed to get a Ticket");
 		}
 	}
 
