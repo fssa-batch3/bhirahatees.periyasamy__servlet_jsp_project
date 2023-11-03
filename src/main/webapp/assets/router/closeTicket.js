@@ -3,6 +3,7 @@ const ticketId = {
 	ticketid: new URLSearchParams(window.location.search).get("ticketid"),
 };
 
+
 const userData = JSON.parse(sessionStorage.getItem("userData"));
 
 document.querySelector(".profile-logo").src = userData.profileImage;
@@ -19,6 +20,15 @@ const updateTicket = (updated) => {
 	}).catch((error) => {
 		console.error(error);
 	})
+}
+
+function isTimeBefore24HoursAgo(inputTime) {
+  const inputDate = new Date(inputTime);
+  console.log(inputDate);
+  const twentyFourHoursAgo = new Date();
+  twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+  console.log(twentyFourHoursAgo);
+  return inputDate > twentyFourHoursAgo;
 }
 
 
@@ -59,14 +69,14 @@ const insertingData = (ticketData) => {
 		if (closingForm !== null) {
 			closingForm.remove();
 		}
-		detailsContainer.appendChild(updateAndEditButton());
+		detailsContainer.appendChild(updateAndEditButton(ticketData.createdTime));
 	}
 };
 
 
 
 
-const updateAndEditButton = () => {
+const updateAndEditButton = (createdTime) => {
 	const buttonContainer = document.createElement("div");
 	buttonContainer.classList.add("button___container");
 	const editButton = document.createElement("button");
@@ -79,8 +89,9 @@ const updateAndEditButton = () => {
 	deleteButton.innerText = "Delete";
 	deleteButton.style.padding = "0.5rem";
 	buttonContainer.appendChild(deleteButton);
-	editButton.addEventListener("click", (e) => {
+	editButton.addEventListener("click", (e) => {	
 		e.preventDefault();
+		if(isTimeBefore24HoursAgo(createdTime)){
 		const editInputs = document.querySelectorAll(".edit-inputs");
 		const removeParagraph = document.querySelectorAll(".ticket__details");
 		let i = 0;
@@ -95,13 +106,15 @@ const updateAndEditButton = () => {
 		saveButton.addEventListener("click", (e) => {
 			e.preventDefault();
 			const data = { toEmail: editInputs[0].value, summary: editInputs[1].value, priority: editInputs[2].value, description: editInputs[3].value, ticketid: ticketId["ticketid"] }
-			console.log(data);
 			updateTicket(data);
 			saveButton.remove();
 			editInputs.forEach((element) => { element.style.display = "none"; })
 			removeParagraph.forEach((element) => { i = 0; element.style.display = "block" })
-
+            
 		})
+		}else{
+			window.alert("You Can edit only within the 24 hours");
+		}
 	});
 	return buttonContainer;
 }

@@ -60,7 +60,6 @@ public class UpdateProfileServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
 		User updatedUser = new User();
-		System.out.println(updatedUser.toString());
 		try {
 			User updateService = new UserService().updateUserService(updatedUser);
 			request.setAttribute("user", updatedUser); 

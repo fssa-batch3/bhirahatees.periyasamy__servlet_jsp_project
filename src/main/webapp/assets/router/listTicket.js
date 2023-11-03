@@ -5,94 +5,97 @@ const userData = JSON.parse(sessionStorage.getItem("userData"));
 document.querySelector(".profile-logo").src = userData.profileImage;
 const yourTickets = document.querySelector(".your-tickets");
 
-const createTable = (ticketList) => {
-	// Create the table header row
-	let thead = document.createElement("thead");
+function createTicketItem(ticketData) {
+    const container = document.getElementById("accordionPanelsStayOpenExample");
 
-	let headerRow = document.createElement("tr");
-	// Create and append table header cells
-	let headers = ["Serial No", "Ticket ID", "Created Time", "From", "To", "Summary", "Description", "Priority", "Status"];
-	for (let i = 0; i < headers.length; i++) {
-		let th = document.createElement("th");
-		th.appendChild(document.createTextNode(headers[i]));
-		headerRow.appendChild(th);
-	}
+    if (ticketData === null) {
+        const div = document.createElement("div");
+        div.innerText = "No Tickets Found.";
+        container.append(div);
+    } else {
+        for (let ticket of ticketData) {
+            const ticketItem = document.createElement("div");
+            ticketItem.className = 'ticket-show';
+            const showContainer = document.createElement("div");
+            const accordionItem = document.createElement('div');
+            accordionItem.className = 'accordion-item names__time';
 
-	thead.appendChild(headerRow);
+            const ticketLink = document.createElement('a');
+            ticketLink.href = `./reply-ticket.html?ticketid=${ticket.ticketId}`;
+            ticketLink.className = 'ticketId';
+            ticketLink.textContent = ticket.ticketId;
 
-	// Access the table element
-	let table = document.createElement("table");
+            const sender = document.createElement('div');
+            sender.className = 'sender';
+            console.log(ticket.from === userData.email);
+            if (ticket.from === userData.email) {
+				
+                sender.textContent = `You Raised a ticket to ${ticket.receiverName}`;
+            } else {
+                sender.textContent = `${ticket.raiserName} raised a ticket to you.`;
+            }
 
-	// Append the table header to the table
-	table.appendChild(thead);
+            const createAndTime = document.createElement('div');
+            createAndTime.className = 'create__time';
+            createAndTime.textContent = ticket.createdTime;
 
-	// Access ticketList from the JSON data
+            const toggleButton = document.createElement('button');
+            toggleButton.style.cssText = 'background-color: white; height: 1rem; width: 1rem; border-radius: 0; border: 1px solid white;';
+            toggleButton.className = 'accordion-button collapsed';
+            toggleButton.type = 'button';
+            toggleButton.setAttribute('data-bs-toggle', 'collapse');
+            toggleButton.setAttribute('data-bs-target', `#panelsStayOpen-collapse-${ticket.ticketId}`);
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toggleButton.setAttribute('aria-controls', `panelsStayOpen-collapse-${ticket.ticketId}`);
 
-	if (ticketList != null) {
-		console.log(ticketList);
-		// Loop through the ticketList
-		for (var i = 0; i < ticketList.length; i++) {
-			let ticket = ticketList[i];
+            const collapseDiv = document.createElement('div');
+            collapseDiv.id = `panelsStayOpen-collapse-${ticket.ticketId}`;
+            collapseDiv.className = 'accordion-collapse collapse';
 
-			// Create a table row
-			let row = document.createElement("tr");
+            const accordionBody = document.createElement('div');
+            accordionBody.className = 'accordion-body';
 
-			// Create and append serial number cell
-			let serialNoCell = document.createElement("td");
-			serialNoCell.appendChild(document.createTextNode(i + 1));
-			row.appendChild(serialNoCell);
+            const emailsDiv = document.createElement('div');
+            emailsDiv.className = 'emails';
+            emailsDiv.innerHTML = `<div><strong>From : </strong>${ticket.from}</div><div><strong>To : </strong>${ticket.to}</div><div><strong>Priority : </strong>${ticket.priority}</div>`;
 
-			// Create and append ticket ID cell with a link
-			let ticketIdCell = document.createElement("td");
-			let ticketIdLink = document.createElement("a");
-			ticketIdLink.href = "./reply-ticket.html?ticketid=" + ticket.ticketId;
-			ticketIdLink.appendChild(document.createTextNode(ticket.ticketId));
-			ticketIdCell.appendChild(ticketIdLink);
-			row.appendChild(ticketIdCell);
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'summary';
+            summaryDiv.innerHTML = `<div><strong>Summary : </strong>${ticket.summary}</div>`;
 
-			// Create and append other cells
-			let cells = [document.createElement("td"), document.createElement("td"), document.createElement("td"), document.createElement("td"),
-				document.createElement("td"), document.createElement("td"), document.createElement("td"), document.createElement("td")];
+            const descriptionDiv = document.createElement('div');
+            descriptionDiv.className = 'summary';
+            descriptionDiv.innerHTML = `<div><strong>Description: </strong><div>${ticket.description}</div></div>`;
+            
+            const closingDescriptionDiv = document.createElement('div');
+            closingDescriptionDiv.className = 'summary';
+            closingDescriptionDiv.innerHTML = `<div><strong>Clsoing Description: </strong><div>${ticket.closingDescription}</div></div>`;
 
-			let cellData = [ticket.createdTime, ticket.from, ticket.to, ticket.summary, ticket.description, ticket.priority, ticket.status];
-
-			for (let j = 0; j < (cells.length - 1); j++) {
-				cells[j].appendChild(document.createTextNode(cellData[j]));
-				console.log(cells[j] , cellData[j] , j);
-				row.appendChild(cells[j]);
-			}
-
-			// Append the row to the table
-			table.appendChild(row);
-		}
-	} else {
-		// Create a row with a "No tickets found" message
-		let noTicketsRow = document.createElement("tr");
-		let noTicketsCell = document.createElement("td");
-		noTicketsCell.colSpan = 9;
-		noTicketsCell.className = "no-tickets";
-		noTicketsCell.appendChild(document.createTextNode("No tickets found."));
-		noTicketsRow.appendChild(noTicketsCell);
-		table.appendChild(noTicketsRow);
-	}
-
-	// Append the table to the document or an existing container
-	document.body.appendChild(table);
+            // Assemble the elements
+            accordionBody.appendChild(emailsDiv);
+            accordionBody.appendChild(summaryDiv);
+            accordionBody.appendChild(descriptionDiv);
+            collapseDiv.appendChild(accordionBody);
+            accordionItem.appendChild(ticketLink);
+            accordionItem.appendChild(sender);
+            accordionItem.appendChild(createAndTime);
+            accordionItem.appendChild(toggleButton);      
+            showContainer.appendChild(accordionItem);
+            ticketItem.appendChild(showContainer);
+            ticketItem.appendChild(collapseDiv);
+            container.append(ticketItem);
+        }
+    }
 }
 
 
 const getTickets = () => {
 	const url = "/pupdesk/ListTicketServlet?status=open";
 	axios.get(url).then((response) => {
-		if (response.data === "null") {
-			createTable(null);
-		} else {
-			createTable(response.data);
-		}
-
+		createTicketItem(response.data); // Pass the ticket data received from the server
 	}).catch((error) => {
-		console.error(error.message)
-	})
+		console.error(error.message);
+	});
 }
 
 getTickets();

@@ -591,17 +591,37 @@ tr:nth-child(even) {
 	display: flex;
 }
 
-.error-container{
-   display:flex;
-   justify-content:center;
-   margin-top:1rem;	
-}
-.error-message{
-	font-size:1.1rem;
-	padding:1rem;
+.error-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 1rem;
 }
 
-.button___container{
-	display:flex;
+.error-message {
+	font-size: 1.1rem;
+	padding: 1rem;
+}
+
+.button___container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.names__time {
+	display: flex;
+	padding: 1rem;
 	justify-content:space-between;
+}
+
+.emails{
+	display:flex;
+	padding:0.5rem;
+	justify-content:space-around;
+}
+.summary{
+	padding:0.5rem;
+	padding-left: 6.2rem;
+}
+.accordion{
+	padding-top:1rem;
 }

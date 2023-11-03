@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import com.fssa.pupdesk.model.Ticket;
+import com.fssa.pupdesk.model.User;
 import com.fssa.pupdesk.services.TicketService;
+import com.fssa.pupdesk.services.UserService;
 import com.fssa.pupdesk.services.exceptions.ServiceException;
 
 /**
@@ -54,17 +56,24 @@ public class CreateTicketServlet extends HttpServlet {
 		}
 		JSONObject jsonData = new JSONObject(requestBody.toString());
 		HttpSession session = request.getSession();
-		String fromEmail = (String) session.getAttribute("logginEmail");
+		String fromEmail = jsonData.getString("from");
 		String toEmail = jsonData.getString("to");
+		String raiserName = jsonData.getString("name");
 		String summary = jsonData.getString("summary");
 		String priority = jsonData.getString("priority");
 		String description = jsonData.getString("description");
 		PrintWriter out = response.getWriter();
-		TicketService ticketService = new TicketService();
-		try {
-			if (ticketService.isreceiverAndRaiserInSameTeam(fromEmail, toEmail)) {
+		TicketService ticketService = new TicketService();	
+		try {if(fromEmail.equals(toEmail)) {
+			throw new ServiceException("You can't raise a ticket to yourself.");
+		}		
+		else if (ticketService.isreceiverAndRaiserInSameTeam(fromEmail, toEmail)) {
+				String firstName = new UserService().getUser(toEmail).getFirstname();
+				String lastName = new UserService().getUser(toEmail).getLastname();
+				String receiverName = firstName + " " + lastName;
+				Ticket ticket =new Ticket(fromEmail,raiserName,receiverName, toEmail, summary, priority, "Open", description) ;
 				if (ticketService
-						.createTicketService(new Ticket(fromEmail, toEmail, summary, priority, "Open", description))) {
+						.createTicketService(ticket)) {
 					out.println("Success");
 				}else {
 					throw new ServiceException("User Not Exists");
